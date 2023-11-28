@@ -1,12 +1,23 @@
+# TODO импортировать необходимые молули
+import csv
 import json
 
-
-def func() -> float:
-    file = "input.json"
-    with open(file) as f:
-        json_data = json.load(f)
-    sum_values = sum([item["score"] * item["weight"] for item in json_data])
-    return round(sum_values, 3)
+INPUT_FILENAME = "input.csv"
+OUTPUT_FILENAME = "output.json"
 
 
-print(func())
+def task() -> None:
+    with open(INPUT_FILENAME) as file: # TODO считать содержимое csv файла
+        lines = [line for line in csv.DictReader(file)]
+
+    with open(OUTPUT_FILENAME, 'w') as f:  # TODO Сериализовать в файл с отступами равными 4
+        json.dump(lines, f, indent=4)
+
+
+if __name__ == '__main__':
+    # Нужно для проверки
+    task()
+
+with open(OUTPUT_FILENAME) as output_f:
+    for line in output_f:
+        print(line, end="")
